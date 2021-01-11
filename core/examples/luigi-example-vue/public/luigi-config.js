@@ -1,4 +1,22 @@
+import {OpenIdConnect} from '@luigi-project/plugin-auth-oidc';
+// require('__path_to_vue.js__');
+// const OpenIdConnect = require('@luigi-project/plugin-auth-oidc');
+
+function tmpFunction() {
+  console.log('Hello World')
+}
+
 Luigi.setConfig({
+    auth: {
+      use: 'keycloak',
+      keycloak: {
+        ipProvider: OpenIdConnect,
+        authority: 'http://192.168.11.191:8180/auth/realms/mastertest/protocol/openid-connect/token',
+        logoutUrl: 'http://192.168.11.191:8180/auth/realms/mastertest/protocol/openid-connect/logout',
+        client_id: 'luigi-project'
+        // scope: 'openid'
+      }
+    },
   navigation: {
     nodes: () => [
       {
@@ -17,13 +35,20 @@ Luigi.setConfig({
             pathSegment: 'sample2',
             label: 'Second',
             icon: 'paper-plane',
-            viewUrl: '/sampleapp.html#/sample2'
+            viewUrl: 'http://pro.br.com:2333',
+            loadingIndicator: {
+              enabled: false
+            }
+            // viewUrl: '/sampleapp.html#/sample2'
           },
           {
             category: { label: 'Links', icon: 'cloud' },
             label: 'Luigi Project',
             externalLink: {
               url: 'https://luigi-project.io/'
+            },
+            loadingIndicator: {
+              enabled: false
             }
           },
           {
@@ -35,8 +60,25 @@ Luigi.setConfig({
           }
         ]
       }
-    ]
+    ],
+    profile: {
+      logout: {
+        label: 'End session',
+        icon: 'sys-cancel',
+        customLogoutFn: console.log('LOGOUT!!!')
+      },
+      items: () => [
+        {
+          category: 'Links',
+          label: 'Vue.js',
+          externalLink: {
+            url: 'https://vuejs.org/'
+          }
+        }
+      ]
+    }
   },
+
   settings: {
     header: {
       title: 'Luigi Vue App',
@@ -45,3 +87,5 @@ Luigi.setConfig({
     responsiveNavigation: 'simpleMobileOnly'
   }
 });
+
+module.exports = tmpFunction;

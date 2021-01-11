@@ -34,6 +34,11 @@ module.exports = {
             from: 'index.html'
           },
           {
+            context: 'public',
+            to: 'luigi-config.js',
+            from: 'luigi-config.js'
+          },
+          {
             context: 'node_modules/@luigi-project/core',
             to: './luigi-core',
             from: {

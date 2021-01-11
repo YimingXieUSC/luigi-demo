@@ -13,7 +13,10 @@
 
 <script>
   export default {
-    name: "sample1"
+    name: "sample1",
+    created(){
+      console.log('Hiiiii');
+    }
   }
 </script>
 
